@@ -1,0 +1,20 @@
+2-A- conjunto de puertas interconectadas cuyo valor de  salida en un momento dado es funcion del valor de entrada en ese instante, si cambia la entrada cambia la salida, los valores anteriores de la entrada no afectan a la salida.
+Se pueden definir de tres formas: Tabla de verdad, Simbolo grafico y Funcion Algebraica.
+
+3-A) Falso, el vonsim puede tener 1,2 o 3 direcciones
+
+3-B) un operando, el resultado se almacena en un espacio predefinido
+
+Usa acumulador
+
+Necesitan LOAD y STORE
+
+4-A- necesita refresco si se usa en la memoria dinamica DRAM o memoria principal
+sus bits estan almacenados en distintos chips
+
+
+4-B- 
+Registros 1ns 1kb/e
+Cache  5-20ns  1mb
+Memoria Principal 60-80ns 1gb
+Disco rigido 10ms 160gb

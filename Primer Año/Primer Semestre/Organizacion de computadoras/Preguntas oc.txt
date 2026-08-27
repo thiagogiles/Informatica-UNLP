@@ -1,0 +1,80 @@
+Tema 2
+
+1) ¿Que es la resolucion?
+2) ¿Que es el error? 
+3) BCD, dar ejemplos de Desempaquetado y Empaquetado C/S S/S  (Opcional)
+
+Tema 3
+
+1) Explicar la idea del punto flotante
+
+2) Inf +- Sup +-
+
+3) Que significa que una mantisa esta normalizada? y con bit implicito?
+
+4) Como calcular Min y Max, Tipos de errores
+
+Tema 4
+
+1) ¿Que es una puerta logica? 
+
+2) ¿Que es un circuito logico combinacional? ¿como puede definirse?  
+
+3) ¿Que es un circuito logico secuencial? 
+
+4) ¿Que son los circuitos secuenciales Biestables (Flip-Flop)?
+
+5)Tipos de flip-flop
+
+6) Para que sirven la Ley de morgan y la Ley de involucion
+
+Tema 5
+
+1) Unidades del modelo de Von Neumann y sus aspectos
+
+2) Por que esta compuesto un computo
+
+3) Definicion de bus, tipo de buses
+
+Tema 6
+
+1) ¿Que es un ciclo de instruccion?
+
+2) Tipos de acciones
+
+3) Pasos del ciclo en Operacion Aritmetica
+
+4) Pasos en Salto Incondicional
+
+Tema 7
+
+1) Elementos de una instruccion de maquina
+
+2) Formato de instruccion
+
+3) Tipos de instrucciones
+
+4) Maquinas de N direcciones
+
+5) Diseño del conjunto de instrucciones
+
+6) Modos de direccionamiento
+
+Tema 8
+
+1) Tipos de registros
+
+2) Caracteristicas de assembler
+
+Tema 11
+
+1) Que es una raid
+
+Los RAID son configuraciones de múltiples discos duros que 
+funcionan como una unidad lógica para mejorar el rendimiento, la 
+capacidad o la seguridad de los datos. Esta tecnología distribuye y 
+organiza los datos entre los discos físicos, y en algunos niveles de 
+RAID incluye redundancia mediante el almacenamiento de 
+información de paridad. RAID tiene varios niveles, cada uno 
+diseñado para diferentes necesidades de rendimiento y protección 
+de datos

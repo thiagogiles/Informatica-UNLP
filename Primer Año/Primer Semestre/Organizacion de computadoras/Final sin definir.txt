@@ -1,0 +1,42 @@
+2-A- Tiene dos entradas, S(Set) y R(Reset) y dos salidas complementarias, q y q negado, son dos puertas NOR conectadas con realimentacion
+
+2-B- se puede representar la compuerta xor por: Tabla de verdad, Simbolo grafico y Funcion Algebraica
+
+3-A- Disminuir la cantidad de bits, manejo mas eficiente de datos, la direccion puede no conocerse hasta la ejecucion
+
+3-B- El modo de direccionamiento por desplazamiento por registro base se aplica con la formula:
+el registro tiene una direccion y el campo un desplazamiento
+
+5-B- el ciclo de instruccion es el proceso por el cual tiene que pasar cada instruccion, esta tiene dos etapas, la de busqueda y la de ejecucion.
+
+4) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pasos de instruccion de operacion aritmetica
+
+Calculo direccion instruccion: define en que direccion se va a almacenar la instruccion
+Busqueda instruccion: lee la instruccion de memoria a cpu
+Decodificacion instruccion: identifica el tipo de operacion y que operandos se van a usar
+Calculo direccion operandos: si implica referencia se determina la direccion
+Busqueda operandos: busca el operando en memoria o E/S
+Operacion sobre los datos: ejecuta la instruccion
+Calculo direccion resultados
+Almacenar resultados
+Actualizar banderas y contadores del prgorama

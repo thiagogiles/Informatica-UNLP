@@ -1,0 +1,48 @@
+Formas de representar o describir la funcion logica xor
+Tabla de verdad, Funcion Algebraica y Simbolo Grafico
+
+Describa el circuito logico secuencial denominado "biestable RS" realice la tabla de comportamiento y un grafico de interconexion de puertas logicas que lo represente
+
+R-S dos entradas S(set) y R (Reset), dos salidas complementarias, Q y Q negado, son dos puertas NOR con realimentacion
+
+Explicar el flip flop D
+permite una sola entrada usando un inversor, remueve dos estados S-R
+
+Describir circuito combinatorio
+conjunto de puertas interconectadas cuya salida en un momento dado es funcion de las entradas en ese instante
+
+Describa los elementos que componen la denominada CPU de una arquitectura von neumann, que funciones cumple cada uno de esos elementos
+Unidad de entrada: define los datos e instrucciones que van a entrar
+Unidad de memoria: donde se alojan los datos e instrucciones
+Unidad aritmetico-logica: procesa los datos
+Unidad de control: dirige las operaciones
+Unidad de salida: envia los resultados
+
+Que es el ciclo de instruccion
+Proceso por el cual debe pasar toda instruccion, tiene dos etapas: de busqueda y de ejecucion
+
+Describa los pasos del ciclo de instruccion de una operacion aritmetica
+
+Calculo direccion instruccion: determina la direccion de la siguiente instruccion
+Busqueda instruccion: lee la instruccion 
+Decodificacion de la instruccion: vemos los operando a usar y el tipo de operacion
+Calculo direccion operandos: si la operacion implica referencia se determina la direccion
+Busqueda operandos:buscar el operando en memoria o E/S
+Operacion sobre los datos: ejecuta la instruccion
+Calculo direccion resultados
+Almacenar resultados
+Actualizar banderas y contador de programa
+
+Con cuales instrucciones puede realizar un movimiento de datos entre CPU y Memoria
+Por el modulo cpu/memoria a traves de las instrucciones LOAD y STORE
+
+
+Vonsim tiene dos direcciones, justificar
+Vonsim usa maquinas de 1,2 y 3 direcciones
+
+
+Que elementos debe poseer una instruccion
+Codigo de operacion: especifica operacion a realizar
+Referencia a operandos fuente: establece donde estan los datos a usar
+Referencia del operando resultado: establece donde se almacena el resultado
+Referencia a la siguiente instruccion: dice donde captar la sig instruccion

@@ -1,0 +1,18 @@
+Respuestas Final 5-25
+
+2-A) 
+Unidad de entrada: define los datos e instrucciones que van a entrar
+Unidad de memoria: almacena los datos e instrucciones en memoria
+Unidad aritmetico-logica: procesa los datos e instrucciones
+Unidad de control: dirige la operacion
+Unidad de salida: envia los resultados
+
+2-B) A traves del procesador a memoria: con las instrucciones LOAD y STORE
+
+3)A) Contiene la direccion de los operandos, se guarda el resultado en uno de los operandos, el operando 1 se tiene que guardar en un registro temporal, Ejemplo ADD A,B
+
+3-B) se define la ubicacion guardando el operando 1 en un registo temporal
+
+4-A) Que se pueda leer, escribir y dos estados (1 o 0)
+
+4-B) Requiere refresco ya que los capacitores se descargan, y necesitamos refrescar la memoria para memorizar los datos
