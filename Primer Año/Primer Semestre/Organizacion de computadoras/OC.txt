@@ -1,0 +1,40 @@
+Dos circuitos son equivalentes si para las mismas entradas se obtienen las mismas salidas
+
+NAND y NOR son compuertas universales
+Usando algebras de boole
+
+Circuitos logicos secuenciales
+
+Las salidas dependen de las entradas y el estado interno del circuito
+Pueden almacenar valores logicosinternamente.
+Los valores se almacenan aunque las entradas no estén.
+
+Lazos de realimentacion, las salidas pueden actuar como valores de entrada
+
+Señales de entrada y salida (binarias)
+Señalde reloj (binaria con forma periodica) 
+Logica combinacional (determina salida y proximo estado)
+Almacenamiento (mantiene informacion del estado actual)
+
+El reloj convierte la señal de entrada en una señal sincrona
+La informacion adicional que proporciona la señal del reloj marca en que precisos instantes se lee la señalde entrada.Es una señal de tiempo
+
+Se puede construir con un flipflop una memoria de 1 bit
+
+Contador: relojes encadenados
+
+
+Con el objetivo de tener un único par de valores 
+de mantisa y exponente para un número, se 
+introduce la normalización.
+
+
+ALU: And Or Xor Not Suma / Multiplexor 4 a 1
+
+Flip flops
+
+JK : retroalimentacion y reloj. Se usa para CONTADORES
+
+SR: puede tener reloj, no retroalimenta , 1 1 prohibido. NO SE USA
+
+D (Delay): Se usa para registros, tiene 1 sola entrada
