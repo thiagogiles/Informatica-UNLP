@@ -1,0 +1,3 @@
+Una librería tiene una estructura de datos con sus 	libros, de cada libro se conoce el titulo y sus paginas, cada pagina tiene numero de pagina y cantidad de palabras. 
+las paginas estan ennumeradas de 1 a 500. Se pide realizar un modulo que cuente para cada libro las paginas repetidas o vacias y retorne el total de ambas por libro.
+ Utilizar ese algoritmo para corregir los 1000 libros de la librería, se debe informar cuantos libros... algo q no me acuerdo.
