@@ -1,0 +1,126 @@
+Un psicólogo necesita un sistema para administrar a sus pacientes. De cada paciente registra: 
+dni, cód. de paciente, obra social (1: ioma 2: pami 3: osde 4: galeno 5: no tiene) y costo abonado
+por sesión.
+
+Implemente un programa que: 
+
+a) Genere un ABB ordenado por cód. de paciente. Para ello, genere información hasta el
+     paciente con dni 0. 
+
+A partir del ABB, realice módulos (uno por inciso) para:
+
+b) Generar una estructura con la cantidad de pacientes de cada obra social.
+c) Calcular la cantidad de pacientes cuyo costo abonado por sesión está comprendido
+     entre dos valores. 
+
+NOTA: Realice el programa principal que invoque a los módulos desarrollados.
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Un psicólogo necesita un sistema para administrar a sus pacientes. De cada paciente registra: dni,
+cód. de paciente, obra social (1: ioma 2: pami 3: osde 4: galeno 5: no tiene) y costo abonado por sesión.
+
+Implemente un programa que: 
+
+a) Genere un ABB ordenado por cód. de paciente. Para ello, genere información hasta el paciente con dni 0. 
+
+A partir del ABB, realice módulos (uno por inciso) para:
+
+b) Generar una estructura con código y dni de los pacientes de osde, sabiendo que cómo máximo son 100. 
+    La estructura debe ordenarse por código ascendentemente .
+c) Dado un código de paciente, aumentar el costo abonado por sesión en un monto recibido. 
+    Considere que el paciente puede no existir.
+
+NOTA: Realice el programa principal que invoque a los módulos desarrollados.
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Un psicólogo necesita un sistema para administrar a sus pacientes. De cada paciente registra: 
+dni, cód. de paciente, obra social (1: ioma 2: pami 3: osde 4: galeno 5: no tiene) y costo abonado 
+por sesión. 
+
+Implemente un programa que: 
+
+a) Genere un ABB ordenado por dni. Para ello, genere información hasta el paciente con dni 0. 
+
+A partir del ABB, realice módulos (uno por inciso) para:
+
+b) Generar una estructura con dni y cód de paciente de los pacientes de ioma, ordenados 
+     por dni descendente.
+c) Dado un dni, modificar la obra social de dicho paciente a una recibida. Considere que el 
+     paciente puede no existir. 
+
+NOTA: Realice el programa principal que invoque a los módulos desarrollados.
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Se lee información acerca de las ventas de productos realizadas en las sucursales de una empresa. De
+cada venta se conoce fecha, código de producto, cantidad vendida y monto total de la venta. La lectura
+finaliza cuando se lee el código de producto -1, el cual no se procesa. Implementar un programa para
+que a partir de la información leida, resuelva los siguientes ítems:
+
+a) Generar un árbol binario de búsqueda ordenado por código de producto, donde cada nodo
+contenga el código del producto y la cantidad total vendida. El código de producto no puede
+repetirse en el árbol.
+
+b) Realizar un módulo que reciba el árbol generado en a. y dos códigos de producto y retorne la suma
+de todas las cantidades vendidas para los códigos de productos comprendidos en el rango.
+
+Nota: La información se lee en forma desordenada. Puede existir mas de una venta para un mismo
+código de producto.
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Una ciudad necesita un sistema para administrar la limpieza de sus esquinas. Para ello, el
+sistema necesita un módulo que lea la información de cada esquina que se limpia: número
+de calle, número de avenida, cantidad de objetos recolectados y número identificatorio del
+camión (1..10) que se encargó de la limpieza de la esquina. A partir de esa información,
+debe generar una estructura que almacene las esquinas agrupadas por número de camión.
+para cada camión, las esquinas deben ordenarse por número de avenida. La lectura finaliza
+con el número de camión 0, el cual no se procesa.
+
+
+Se pide implementar un programa en Pascal que incluya:
+
+a) Un módulo Cargar que (de manera aleatoria) genere datos de las esquinas y los
+
+    almacene en una estructura adecuada.
+
+b) Un módulo que reciba la estructura generada en a) y (usando merge acumulador)  
+obtenga para cada avenida el total de objetos recolectados (entre todos los
+camiones). 
+    Genere un ABB que contenga número de avenida y el total de objetos
+recolectados en
+    la avenida, ordenado por total de objetos recolectados.
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Una obra social dispone de un árbol binario de búsqueda con la información de sus
+afiliados. De cada afiliado se conoce: Número de afiliado, Nro de DNI, Plan (1..5) y año de
+ingreso a la obra social. El árbol se encuentra ordenado por número de afiliado. Se solicita:
+
+Implementar un módulo que reciba el árbol de afiliados, Nro de DNI Num1, Nro de DNI
+Num2 y un número de Plan, y retorne un vector ordenado por Nro de DNI del afiliado. El
+vector debe contener el número de afiliado y DNI de aquellos afiliados cuyo Nro de DNI se
+encuentra comprendido entre Num1 y Num2 (siendo Num1 menor que Num2) y el Plan se
+corresponda con el recibido por parámetro. Por norma de la obra social, cada Plan puede
+contar con a lo sumo 500 afiliados.
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Una perfumería dispone en papel de la información de las ventas de sus productos.
+De cada venta se conoce código de producto, tipo de producto, fecha, cantidad vendida,
+monto total de la venta.
+
+Se pide realizar un programa que:
+a) A partir de la información de ventas ingresadas por teclado, genere un ABB que almacene
+    para cada código de producto, su tipo y la información de todas sus ventas (fecha,
+    cantidad vendida, monto de la venta). El ABB debe estar ordenado por código de producto.
+    El ingreso de información finaliza cuando se lee cantidad vendida -1.
+
+b) Luego de generada la estructura, informar (debe implementar un módulo para cada inciso):
+    i - El tipo de los productos cuyo código está comprendido entre los valores 1500 y 2200.
+    ii – La cantidad de ventas cuyo monto total resultó superior a 100 p
+
