@@ -1,0 +1,22 @@
+Memoria cache
+memoria rapida entre la principal y la cpu
+puede localizarse en un chip o en modulo cpu
+
+A medida que nos alejamos de la cpu hay mas cantidad y menos velocidad
+
+Inclusion: datos almacenados en un nivel tienen que estar en un nivel inferior
+
+Coherencia: las copias de las informaciones deben tener los mismos valores
+
+La cpu solicita contenido de 1 direccion de memoria
+
+si la cache lo tiene, lo obtiene rapidamente
+
+sino, lee el bloque con esa direccion desde la memoria principal y copia en la cache
+
+Hit= encuentra en la cache la informacion
+Miss= no la encuentra
+
+Tiene delay
+
+Los fallos se gestionan mediante hardware y detienen el procesador hasta conseguir el dato

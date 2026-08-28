@@ -1,0 +1,35 @@
+
+Hasta 7fffH
+
+         IP= 2000H al iniciar, se va incrementando
+         SP= start pointer, puntero a la pila. Inicia en 8000H (tope de pila), 
+2 bytes a traves de un registro
+Push: (AX,BX,CX o DX) Ingresa valores a la pila (SP=SP-2) --> en [SP]=AX si hago Push AX(01 , 2E)
+
+Pop:  (AX,BX,CX o DX) Saca el ultimo valor de la pila --> pop BX, BX = [SP] y despues (SP=SP+2)
+
+CALL: guarda el ip retorno (ret) en la pila
+
+Parametros
+
+
+ORG 1000h
+n1 db 1
+n2 db 2
+res db ?
+
+ORG 2000h
+mov AL, n1
+mov AH, n2
+mov BX , offset res
+
+call Suma_y_guarda
+
+ORG 2500h
+suma_y_guarda: ADD AL, AH
+  mov [bx],AL
+    RET
+HLT
+end
+
+

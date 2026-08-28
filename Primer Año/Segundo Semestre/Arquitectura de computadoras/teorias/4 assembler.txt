@@ -1,0 +1,46 @@
+ORG 1000h 
+NUM0 DB 0CAh 
+NUM1 DB 0 
+NUM2 DW ? 
+NUM3 DW 0ABCDh 
+NUM4 DW ? 
+ORG 2000H 
+1- MOV BL, NUM0 
+2- MOV BH, 0FFh 
+3- MOV CH, BL 
+4- MOV AX, BX 
+5- MOV NUM1, AL 
+6- MOV NUM2, 1234h 
+7- MOV BX, OFFSET NUM3 
+8- MOV DL, [BX] 
+9- MOV AX, [BX] 
+10- MOV BX, 1006h 
+11- MOV WORD PTR [BX], 0CDEFh 
+HLT 
+END
+
+
+Pasos
+1) mueve a BL el valor de 1000H (CA) entonces BL = CA
+
+2) mueve a BH el valor FF en hexa entonces BH = FF / BX = FF CA
+
+3) mueve el valor de BL a CH entonces CH = CA
+
+4) mueve los valores del registro BX a AX entonces AH = BH(FF) y AL = BL(CA)
+
+5) mueve el valor de AL a la variable num1 en la posicion 1001H entonces 1001H=CA
+
+6) mueve los valores 1234 en la direccion de la variable num2 entonces 1002H=34 y 1003H=12
+
+7) mueve al registro BX la direccion de la variable num3 que seria 1004H entonces BH= 10 y BL= 04 BX(1004)
+
+8) mueve a DL la direccion que esta en el registro BX(1004H) entonces DL=CD
+
+9) mueve a AX la dirrecion que esta en el registro BX(1004H y su siguiente) entonces AL=CD y AH= 1005H(AB)
+
+10) mueve al registro BX la direccion 1006H entonces BX= 1006
+
+11) mueve a la direccion del registro BX(1006) le devuelve los valores CD y EF entonces 1006H= EF y su siguiente 1007H=CD
+
+

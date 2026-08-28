@@ -1,0 +1,268 @@
+PA EQU 30h
+PB equ 31h
+EOI equ 20h
+PIC equ 20h
+INT1 EQU 25h
+CONT equ 10h
+COMP equ 11h
+
+Org 60
+ abc dw timip
+
+ org 1000h
+ n db 60, 30, 80
+ d db 10, 5, 7, 0
+ f db ?
+ corte db 0
+ org 3000h
+ timip:mov bx,cx
+ mov al, [bx]
+ out pb, al
+ inc cx
+ cmp al, 0
+ jnz seguir
+  mov al, 0ffH
+  out pic+1,al
+  mov al,eoi
+  out eoi,al
+  inc corte
+  jmp fin
+  seguir:
+   mov bx,dx
+   mov al, [bx]
+   out pa,al
+   inc dx
+   fin:
+   mov al, eoi
+   out eoi,al
+   mov al,0
+   out cont,al
+   iret
+
+org 2000h
+cli
+mov al,11111101b
+out pic+1,al
+mov al,15
+out int1,al
+mov al,1
+out comp,al
+mov al,0
+out cont,al
+sti
+mov cx,offset d
+mov dx,offset n
+lazo:cmp corte,0
+jz lazo
+int 0
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+org 1000h
+vector dw 50,15,25,12,7,5,4,3,1
+gana db "Ganan los pares"
+nogan db "Ganan los impares"
+par dw 0
+impar dw 0
+
+org 3000h
+contarpares: mov bx,sp
+mov cl ,[bx+2]
+mov ax, [bx+4]
+mov bx,ax
+loop: mov ax,[bx]
+call es_par
+add bx,2
+sub cl,2
+jnz loop
+ret
+
+org 3200h
+es_par: and ax,1
+jnz no
+mov dx, 1
+inc par
+jmp volver
+no: mov dx,0
+inc impar
+volver:
+ret
+
+org 2000h
+mov cl,0
+mov ax,offset vector
+push ax
+mov ax,offset gana - offset vector
+push ax
+call contarpares
+pop ax
+pop ax
+mov ax,par
+cmp ax,impar
+js nogana
+  mov bx,offset gana
+  mov al, offset nogan - offset gana
+  int 7
+  jmp fin
+nogana: mov bx,offset nogan
+mov al, offset par - offset nogan
+int 7
+fin:
+int 0
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+PARCIAL EJERCICIO 1
+org 1200h  
+nros dw 91, 93,95,97,99
+
+org 3500h
+rut: mov bx,sp ;7ffc
+add bx,2 ;7ffe
+mov bx,[bx] ;1200h
+add bx,6 ;1206h = 97
+mov ax,[bx] ; 97
+sub bx,4 ; 1202
+mov cx,[bx] ; 93
+ret
+
+
+org 2000h
+mov bx,offset nros ; moves 1200h
+push bx ;7ffe           
+call rut ;7ffc
+int 0
+end
+
+AX = 97
+CX = 93
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+PARCIAL EJERCICIO 2
+
+EOI EQU 20h
+IMR EQU 21h
+INT1 EQU 25h
+CONT EQU 10h
+COMP EQU 11h
+org 56
+  clkdir dw clk
+
+org 1000h
+ letra db "x"
+ car_leido db ?
+ flag db 0
+
+org 3000h
+ clk: int 6
+ cmp cl,[bx]
+ jnz fin
+ inc flag
+ mov al,0ffh
+fin: mov al,0
+ out cont,al
+ mov al,20h
+ out eoi,al
+ iret
+
+org 2000h
+cli
+mov al,0fdh
+out imr,al
+mov al,14
+out int1,al
+mov al,9
+out comp,al
+mov al,0
+out cont,al
+mov bx,offset car_leido
+mov cl,letra
+sti
+loop:cmp flag,1
+jnz loop
+int 0
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+PARCIAL EJERCICIO 3
+
+PA EQU 30h
+PB EQU 31h
+CA EQU 32h
+CB EQU 33h
+
+org 40
+abc dw f10
+
+org 1000h
+msj_200 db "se imprimieron menos de 200 caracteres"
+caracter db ?
+conteo db 0
+flag db 0
+org 3000h
+imprimir:mov bx,offset caracter
+  int 6
+  mov al,[bx]
+  out pb,al
+  inc conteo
+  in al,pa
+  or al,2
+  out pa,al
+  in al,pa
+  and al,0fdh
+  out pa,al
+  ret
+
+org 3200h
+f10: inc flag
+    mov al,20h
+    out 20h,al
+    iret
+org 2000h
+cli
+mov al,11111110b
+out 21h,al
+mov al,10
+out 24h,al
+mov al,11111101b
+out ca,al
+mov al,0
+out cb,al
+sti
+poll:in al, pa
+and al,1
+jnz poll
+  cmp flag,1
+  jz final
+ call imprimir
+ jnz poll
+ final: mov cl, conteo
+ cmp cl,199
+ js fin
+   mov bx, offset msj_200
+   mov al, offset caracter - offset msj_200
+   int 7
+fin: 
+
+int 0
+end

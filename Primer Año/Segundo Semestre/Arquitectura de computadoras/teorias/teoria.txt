@@ -1,0 +1,29 @@
+daddi $sp,$0,0x400 --> Seteo pila
+
+push:
+sd $ra,0($sp)
+daddi $sp,$sp,-8
+
+pop:
+daddi $sp,$sp,8
+ld $ra,0($sp)
+
+Raw: una instruccion intenta acceder a un registro pendiente de lectura o escritura por otra instruccion
+
+Bts: cuando una instruccion de salto determina que la siguiente del cauce no es la que se debe ejecutar
+
+Str: cuando dos instrucciones intentan acceder a un mismo recurso simultaneamente (mem)
+
+War: Escribir despues de leer  Leer R -> Escribir R  ( add -> mul/div)
+
+Waw: Escribir despues de escribir   Escribir R --> Escribir R (mul/div --> add)
+
+FW: no verifica operandos salvo los saltos
+daddi: atasco en ex
+ld sd: atasco en mem
+salto: atasco en id
+
+BTB: tabla/buffer para predecir el salto, si salto la ultima vez predice que salta y sino predice que no salta
+
+Delay slot:
+  retarda el salto 1 ciclo haciendo que se ejecute siempre la instruccion despues del salto

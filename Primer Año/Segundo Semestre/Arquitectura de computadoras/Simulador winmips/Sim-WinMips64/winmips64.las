@@ -1,0 +1,1 @@
+C:\Users\52984\Desktop\visual\mips\p2.s
