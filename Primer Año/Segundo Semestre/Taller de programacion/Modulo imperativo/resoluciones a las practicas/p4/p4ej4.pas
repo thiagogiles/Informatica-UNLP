@@ -132,10 +132,11 @@ begin
   aux^.sig:=l;
   l:=aux;
 end; 
+
 procedure cargarArbolB(var ab:arbolB; a:alquiler);
 begin
   if(ab=nil) then begin
-    new(ab); ab^.dato.cod:= a.cod; agregarAdelante(ab^.dato.l,a.a); ab^.hi:=nil; ab^.hd:=nil;
+    new(ab); ab^.dato.l:=nil; ab^.dato.cod:= a.cod; agregarAdelante(ab^.dato.l,a.a); ab^.hi:=nil; ab^.hd:=nil;
   end
   else if(a.cod < ab^.dato.cod) then
     cargarArbolB(ab^.hi,a)
@@ -183,12 +184,13 @@ end;
 procedure recorrerCliente(a:arbolA; var cant:integer; val:integer);
 begin
   if(a<>nil) then begin
-    if(a^.dato.cod = val) then
+    if(a^.dato.a.num = val) then
       cant:=cant + 1;
     recorrerCliente(a^.hi,cant,val);
     recorrerCliente(a^.hd,cant,val);
 end;
 end;
+
 function contarCliente (a:arbolA):integer;
 var
   cant,val:integer;
@@ -267,25 +269,35 @@ begin
   else
     ad^.dato.totalHoras:= ad^.dato.totalHoras + alqb.l^.dato.cantHoras;
 end;
+
+
 procedure generarArbolD(var ad:arbolD; ab:arbolB);
+var
+  aux:lista;
 begin
   if(ab<>nil) then begin
-    while(ab^.dato.l<>nil) do begin
+    aux:=ab^.dato.l;
+    while(aux<>nil) do begin
       cargarArbolD(ad,ab^.dato);
-      ab^.dato.l:=ab^.dato.l^.sig;
+      aux:=aux^.sig;
     end;
     generarArbolD(ad,ab^.hi);
     generarArbolD(ad,ab^.hd);
  end;
 end;
 
+procedure genD(var aD:arbolD; ab:arbolB);
+begin
+  aD:=nil;
+  generarArbolD(aD,ab);
+enD;
 ///////////////// INCISO H /////////////////////////////////
 
 procedure imprimirD(ad:arbolD);
 begin
   if(ad<>nil) then begin
-    writeln('Codigo ', ad^.dato.cod );
-    writeln(ad^.dato.totalHoras, 'Horas totales');
+    writeln('Codigo de bicicleta ' , ad^.dato.cod );
+    writeln(ad^.dato.totalHoras , ' Horas totales');
     imprimirD(ad^.hi);
     imprimirD(ad^.hd);
 end;
@@ -296,8 +308,11 @@ end;
 procedure buscarAbonado(a:arbolA; max,min:integer; var total:real);
 begin
   if(a<>nil) then begin
-    if(a^.dato.cod >= min) and (a^.dato.cod <= max) then 
-      total:= total + a^.dato.a.abonado
+    if(a^.dato.cod >= min) and (a^.dato.cod <= max) then begin
+      total:= total + a^.dato.a.abonado;
+      buscarAbonado(a^.hi,max,min,total);
+      buscarAbonado(a^.hd,max,min,total);
+    end
     else if(a^.dato.cod < min) then
       buscarAbonado(a^.hd,max,min,total)
     else
@@ -320,20 +335,23 @@ end;
 
 
 //////////////////////// INCISO J ///////////////////////////////////////////////////
-function contar(l:lista; total:real):real;
+function actu(l:lista; total:real):real;
 begin
-  if(l<>nil) then begin
+  while (l<>nil) do begin
     total:= total + l^.dato.abonado;
-    contar(l^.sig,total);
+    l:=l^.sig;
   end;
-  contar:=total;
+ actu:=total;
 end;
 
 procedure buscarRecaudado (ab:arbolb; max,min:integer; var total:real);
 begin
   if(ab<>nil) then begin
-    if(ab^.dato.cod >= min) and (ab^.dato.cod <= max) then 
-      total:= total + contar(ab^.dato.l,total)
+    if(ab^.dato.cod >= min) and (ab^.dato.cod <= max) then begin
+        total:= total + actu(ab^.dato.l,total);
+        buscarRecaudado(ab^.hd,max,min,total);
+        buscarRecaudado(ab^.hi,max,min,total);
+     end
     else if(ab^.dato.cod < min) then
       buscarRecaudado(ab^.hd,max,min,total)
     else
@@ -369,9 +387,12 @@ begin
   ac:=nil;
   generarArbolC(ac,a);
   ad:=nil;
-  generarArbolD(ad,ab);
+  genD(ad,ab);
+  writeln('Imprimiendo arbol d');
   imprimirD(ad);
   writeln(totalAbonado(a));
   writeln(recaudado(ab));
 end.
 
+
+// Preguntar que hacer con la lista en generard que hace que quede en nil si no pongo auxiliar
