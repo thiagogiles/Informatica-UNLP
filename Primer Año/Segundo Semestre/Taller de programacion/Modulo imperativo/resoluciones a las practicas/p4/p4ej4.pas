@@ -215,10 +215,13 @@ begin
   if(a=nil) then
     contarCliente:=0
   else if(a^.dato.a.num = val) then
-    contarCliente := 1 + contarCliente(a^.hi,val) + contarCliente(a^.hd,val)
+    contarCliente := 1 + contarCliente(a^.hd,val)
+  else if(a^.dato.a.num < val) then
+    contarCliente(a^.hd,val)
   else
-    contarCliente:= contarCliente(a^.hi,val) + contarCliente(a^.hd,val)
+    contarCliente(a^.hi,val)
  end;
+ 
 ///////////////////////// INCISO E //////////////////////////////////
 
 function recorrerLista(l:lista; val:integer):integer;
@@ -234,6 +237,16 @@ begin
  recorrerLista:=cant;
 end;
 
+function recorrerLista(l:lista; val:integer):integer;
+begin
+  if(l<>nil) then begin
+    if(l^.dato.num = val) then
+      recorrerLista:= 1 + recorrerLista(l^.sig)
+    recorrerLista:= recorrerLista(l^.sig);
+  else
+    recorrerLista:=0
+  end;
+end;
 {procedure recorrerClienteB(a:arbolB; var cant:integer; val:integer);
 begin
   if(a<>nil) then begin
@@ -259,8 +272,12 @@ function contarClienteB(a:arbolB; val:integer):integer;
 begin
   if(a=nil) then
     contarClienteB:=0
+  else if(a^.dato.num = val) then
+    contarClienteB:= recorrerLista(a^.dato.l,val) 
+  else if(a^.dato.num < val) then
+    contarClienteB:= contarClienteB(a^.hd,val)
   else
-    contarClienteB:= recorrerLista(a^.dato.l,val) + contarClienteB(a^.hi,val) + contarClienteB(a^.hd,val);
+    contarClienteB:= contarClienteB(a^.hi,val)
 end;
 
 //////////////////////////// INCISO F /////////////////////////////////////////
@@ -383,7 +400,7 @@ begin
     actu:=0
 end;
 
-procedure buscarRecaudado (ab:arbolb; max,min:integer);
+function buscarRecaudado (ab:arbolb; max,min:integer):real;
 begin
   if(ab<>nil) then begin
     if(ab^.dato.cod >= min) and (ab^.dato.cod <= max) then begin
@@ -394,21 +411,21 @@ begin
     else
      buscarRecaudado(ab^.hi,max,min)
  end;
+ else
+   buscarRecaudado:=0;
 end;
 
 function recaudado(ab:arbolB):real;
 var
-  total:real;
   min,max:integer;
 begin
-  total:=0;
   writeln('Ingrese un parametro maximo');
   readln(max);
   writeln('Ingrese un parametro minimo');
   readln(min);
-  buscarRecaudado(ab,max,min,total);
-  recaudado:=total;
+  recaudado:=buscarRecaudado(ab,max,min);
 end;
+
 var
   a:arbolA;
   ab:arbolB;
