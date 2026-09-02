@@ -163,25 +163,33 @@ end;
 ////////////////// INCISO B ///////////////////////////////////
 function maxArbolA(a:arbolA):integer;
 begin
+ if(a<>nil) then begin
   if(a^.hd =nil) then
     maxArbolA:= a^.dato.cod
 else
-  maxArbolA:=maxArbolA(a^.hd);
+  maxArbolA:=maxArbolA(a^.hd)
+ end
+else
+  maxArbolA:=-1;
 end;
 
 
 //////////////////////////// INCISO C /////////////////////////////////
 function minArbolB(ab:arbolB):integer;
 begin
+  if(ab<>nil) then begin
   if(ab^.hi = nil) then
     minArbolB:= ab^.dato.cod
   else
     minArbolB:= minArbolB(ab^.hi);
+  end
+ else
+   minArbolB:=-1;
 end;
 
 ///////////////////////// INCISO D ///////////////////////////////////
 
-procedure recorrerCliente(a:arbolA; var cant:integer; val:integer);
+{procedure recorrerCliente(a:arbolA; var cant:integer; val:integer);
 begin
   if(a<>nil) then begin
     if(a^.dato.a.num = val) then
@@ -200,20 +208,33 @@ begin
   readln(val);
   recorrerCliente(a,cant,val);
   contarCliente:=cant;
-end;
+end;}
 
+function contarCliente(a:arbolA; val:integer):integer;
+begin
+  if(a=nil) then
+    contarCliente:=0
+  else if(a^.dato.a.num = val) then
+    contarCliente := 1 + contarCliente(a^.hi,val) + contarCliente(a^.hd,val)
+  else
+    contarCliente:= contarCliente(a^.hi,val) + contarCliente(a^.hd,val)
+ end;
 ///////////////////////// INCISO E //////////////////////////////////
 
-procedure recorrerLista(l:lista; var cant:integer; val:integer);
+function recorrerLista(l:lista; val:integer):integer;
+var
+  cant:integer;
 begin
+  cant:=0;
   while(l<>nil) do begin
     if(l^.dato.num = val ) then
       cant:= cant + 1;
     l:=l^.sig;
   end;
+ recorrerLista:=cant;
 end;
 
-procedure recorrerClienteB(a:arbolB; var cant:integer; val:integer);
+{procedure recorrerClienteB(a:arbolB; var cant:integer; val:integer);
 begin
   if(a<>nil) then begin
     recorrerLista(a^.dato.l,cant,val);
@@ -231,6 +252,15 @@ begin
   readln(val);
   recorrerClienteB(ab,cant,val);
   contarClienteB:=cant;
+end;
+}
+
+function contarClienteB(a:arbolB; val:integer):integer;
+begin
+  if(a=nil) then
+    contarClienteB:=0
+  else
+    contarClienteB:= recorrerLista(a^.dato.l,val) + contarClienteB(a^.hi,val) + contarClienteB(a^.hd,val);
 end;
 
 //////////////////////////// INCISO F /////////////////////////////////////////
@@ -319,6 +349,7 @@ begin
      buscarAbonado(a^.hi,max,min,total)
  end;
 end;
+
 function totalAbonado(a:arbolA):real;
 var
   total:real;
@@ -335,27 +366,33 @@ end;
 
 
 //////////////////////// INCISO J ///////////////////////////////////////////////////
-function actu(l:lista; total:real):real;
+{function actu(l:lista; total:real):real;
 begin
   while (l<>nil) do begin
     total:= total + l^.dato.abonado;
     l:=l^.sig;
   end;
  actu:=total;
+end;}
+
+function actu(l:lista):real;
+begin
+  if(l<>nil) then 
+    actu:= l^.dato.abonado + actu(l^.sig)
+  else
+    actu:=0
 end;
 
-procedure buscarRecaudado (ab:arbolb; max,min:integer; var total:real);
+procedure buscarRecaudado (ab:arbolb; max,min:integer);
 begin
   if(ab<>nil) then begin
     if(ab^.dato.cod >= min) and (ab^.dato.cod <= max) then begin
-        total:= total + actu(ab^.dato.l,total);
-        buscarRecaudado(ab^.hd,max,min,total);
-        buscarRecaudado(ab^.hi,max,min,total);
+        buscarRecaudado:= actu(ab^.dato.l) + buscarRecaudado(ab^.hd,max,min,total) + buscarRecaudado(ab^.hi,max,min)
      end
     else if(ab^.dato.cod < min) then
-      buscarRecaudado(ab^.hd,max,min,total)
+      buscarRecaudado(ab^.hd,max,min)
     else
-     buscarRecaudado(ab^.hi,max,min,total)
+     buscarRecaudado(ab^.hi,max,min)
  end;
 end;
 
@@ -377,13 +414,18 @@ var
   ab:arbolB;
   ac:arbolC;
   ad:arbolD;
+  val:integer;
 begin
   generarArbol(a,ab);
   writeln('Arboles generados');
   writeln('El codigo mayor es: ' , maxArbolA(a));
   writeln('El codigo menor es: ', minArbolB(ab));
-  writeln(contarCliente(a), ' Alquileres para ese cliente');
-  writeln(contarClienteB(ab), 'Alquileres para ese cliente');
+  writeln('Ingrese un valor');
+  readln(val);
+  writeln(contarCliente(a,val), ' Alquileres para ese cliente');
+  writeln('Ingrese un valor');
+  readln(val);
+  writeln(contarClienteB(ab,val), 'Alquileres para ese cliente');
   ac:=nil;
   generarArbolC(ac,a);
   ad:=nil;
@@ -396,3 +438,7 @@ end.
 
 
 // Preguntar que hacer con la lista en generard que hace que quede en nil si no pongo auxiliar
+// Inicializar valores en el programa o adentro de una funcion
+// Recorrer las listas iterativamente con auxiliar o recursivas sin auxiliar para no perder el nodo
+// Hacer un proceso aparte para inicializar los arboles o en el programa
+// 

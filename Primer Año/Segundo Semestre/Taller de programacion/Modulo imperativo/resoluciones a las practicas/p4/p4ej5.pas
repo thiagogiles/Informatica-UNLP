@@ -136,6 +136,7 @@ procedure imprimirArbol(a:arbol);
 begin
   if(a<>nil) then begin
     imprimirArbol(a^.hi);
+    writeln(a^.dato.numHistoria);
     imprimir(a^.dato.l);
     imprimirArbol(a^.hd);
 end;
@@ -301,20 +302,10 @@ begin
     ab^.dato.total:= ab^.dato.total + sumarT(a.l)
   end;
 
-procedure cargarArb(var ab:arbolb; a:datoarbol);
-var
-  aux:lista;
-begin
-  aux:=a.l;
-  while(aux<>nil) do begin
-    cargarArboltotal(ab,a);
-    aux:=aux^.sig;
-  end;
-end;
 procedure generarArboltotal(var ab:arbolb; a:arbol);
 begin
   if(a<>nil) then begin
-    cargarArb(ab,a^.dato);
+    cargarArboltotal(ab,a^.dato);
     generarArboltotal(ab,a^.hi);
     generarArboltotal(ab,a^.hd);
 end;
@@ -344,4 +335,4 @@ begin
 end.  
   
   
-///// Preguntar como recorrer la lista en el imprimirarbol, se puede igualando aux antes de entrar y hacerlo recursivo o con while mas simple
+
