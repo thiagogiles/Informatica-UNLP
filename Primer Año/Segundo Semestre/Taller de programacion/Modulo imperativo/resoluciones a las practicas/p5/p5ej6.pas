@@ -74,9 +74,9 @@ begin
     a^.hi:=nil; a^.hd:=nil;
   end
   else if(a^.dato.codPostal < e.codpostal)then
-    cargarArbol(a^.hi,e)
-  else if(a^.dato.codPostal > e.codPostal) then
     cargarArbol(a^.hd,e)
+  else if(a^.dato.codPostal > e.codPostal) then
+    cargarArbol(a^.hi,e)
   else
     a^.dato.v[e.mes]:=a^.dato.v[e.mes] + 1
  end;
