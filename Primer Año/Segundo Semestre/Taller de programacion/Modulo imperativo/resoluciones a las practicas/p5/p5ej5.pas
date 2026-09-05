@@ -73,9 +73,9 @@ begin
     a^.hd:=nil;
   end
   else if(art.dni < a^.dato.dni) then
-    cargarArbol(a^.hi,art)
-  else if(art.dni > a^.dato.dni) then
     cargarArbol(a^.hd,art)
+  else if(art.dni > a^.dato.dni) then
+    cargarArbol(a^.hi,art)
   else
     a^.dato.total:= a^.dato.total + 1
   end;
