@@ -168,16 +168,17 @@ end;
 
 function buscarMayor(v:vector; i,max,codmax:integer):integer;
 begin
-  if(i<=10 ) then begin
+  if(i> 10 ) then
+    buscarMayor:=codmax
+  else begin
     if(v[i] > max) then begin
       max:=v[i];
       codmax:=i;
     end;
     buscarMayor:=buscarMayor(v,i+1,max,codmax)
   end
-else
- buscarMayor:=codmax;
 end;
+
 function codMayor(v:vector):integer;
 var
   i,max,codmax:integer;
