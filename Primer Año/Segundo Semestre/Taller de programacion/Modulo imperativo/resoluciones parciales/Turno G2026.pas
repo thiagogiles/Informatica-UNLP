@@ -150,7 +150,7 @@ end;
 
 function recorrerVec(v:vector; i,valor:integer):boolean;
 begin
-  if(i> 10) or (not recorrerVec) then
+  if(i> 10) and (not recorrerVec) then
     recorrerVec:=false
   else begin
     if(v[i] = valor) then
