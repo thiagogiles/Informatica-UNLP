@@ -150,6 +150,11 @@ begin
  end;
 end;
 
+procedure crearLista(var lb:listab; a:arbol);
+begin
+  lb:=nil;
+  generarLista(lb,a);
+end;
 /////////////// INCISO C ///////////////////
 // c) Realizar un módulo recursivo que reciba la estructura generada en inciso b) y retorne patente del vehículo con mayor cantidad de días alquilados
 
