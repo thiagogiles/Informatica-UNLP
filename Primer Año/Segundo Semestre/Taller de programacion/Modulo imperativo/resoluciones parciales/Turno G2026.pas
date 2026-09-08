@@ -17,16 +17,28 @@ program Turno_G2026;
 type
   rangocategoria=1..10;
   rangodia=1..31;
-  entrega = record
-    dni:integer;
+  datolista = record
     codigo:integer;
     dia:rangodia;
     categoria:rangocategoria;
   end;
+  entrega = record
+    dni:integer;
+    dl:datolista;
+  end;
   
+  lista = ^nodoA;
+    nodoA=record
+      dato:datolista;
+      sig:lista;
+   end;
+datoarbol=record
+  dni:integer;
+  l:lista;
+end;  
   arbol = ^nodo;
   nodo=record
-    dato:entrega;
+    dato:datoarbol;
     hi:arbol; hd:arbol;
  end;
  
@@ -37,11 +49,11 @@ begin
   readln(e.dni);
   if(e.dni<>0) then begin
     writeln('Ingrese el codigo de cliente');
-    readln(e.codigo);
+    readln(e.dl.codigo);
     writeln('Ingrese el dia');
-    readln(e.dia);
+    readln(e.dl.dia);
     writeln('Ingrese la categoria');
-    readln(e.categoria);
+    readln(e.dl.categoria);
  end;
 end;
 
@@ -53,18 +65,34 @@ begin
     v[i]:=0;
   end;
   
+procedure agregarAdelante(var l:lista; dl:datolista);
+var
+  aux:lista;
+begin
+  new(aux); aux^.dato:=dl; aux^.sig:=l; l:=aux;
+end;
+
+procedure iniciar(var d:datoarbol; e:entrega);
+begin
+  d.dni:=e.dni;
+  d.l:=nil;
+  agregarAdelante(d.l,e.dl);
+end;
 procedure cargarArbol(var a:arbol; e:entrega);
 begin
   if(a=nil) then begin
     new(a);
-    a^.dato:=e;
+    iniciar(a^.dato,e);
     a^.hi:=nil; a^.hd:=nil;
   end
   else if(e.dni < a^.dato.dni) then
     cargarArbol(a^.hi,e)
-  else
+  else if(e.dni > a^.dato.dni) then
     cargarArbol(a^.hd,e)
-end;
+  else
+    agregarAdelante(a^.dato.l,e.dl)
+ end;
+
 procedure generar(var a:arbol; var v:vector);
 var
   e:entrega;
@@ -74,7 +102,7 @@ begin
   leerEntrega(e);
   while(e.dni<>0) do begin
     cargarArbol(a,e);
-    v[e.categoria]:=v[e.categoria] + 1;
+    v[e.dl.categoria]:=v[e.dl.categoria] + 1;
     leerEntrega(e);
   end;
 end;
@@ -83,13 +111,25 @@ end;
 // Implementar un módulo que reciba el árbol generado en a)i y dos DNI. El módulo debe retornar la cantidad total de entregas que fueron realizadas a los clientes que se encuentren entre ambos 
 // DNI (inclusive).
 
+function lis(l:lista):integer;
+var
+  cant:integer;
+begin
+  cant:=0;
+  while(l<>nil) do begin
+    cant:=cant + 1;
+    l:=l^.sig;
+  end;
+  lis:=cant;
+end;
+
 function cont(a:arbol; sup,inf:integer):integer;
 begin
   if(a=nil) then
     cont:=0
   else begin
     if(a^.dato.dni >= inf) and (a^.dato.dni <= sup) then
-      cont:= 1 + cont(a^.hi,sup,inf) + cont(a^.hd,sup,inf)
+      cont:= lis(a^.dato.l) + cont(a^.hi,sup,inf) + cont(a^.hd,sup,inf)
     else if(a^.dato.dni < inf) then
       cont:= cont(a^.hd,sup,inf)
     else
