@@ -155,7 +155,7 @@ end;
 
 procedure contarMax(l:listaB; var max:integer; var patente:string);
 begin
-  if(l<>nil) then begin
+  if(l<>nil) then begin 
     if(l^.dato.totalDias > max) then begin
       max:=l^.dato.totalDias;
       patente:= l^.dato.patente;
