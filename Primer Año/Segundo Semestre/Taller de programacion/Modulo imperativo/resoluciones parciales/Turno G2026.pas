@@ -150,14 +150,14 @@ end;
 
 function recorrerVec(v:vector; i,valor:integer):boolean;
 begin
-  if(i> 10) and (not recorrerVec) then
+  if(i > 10) then
     recorrerVec:=false
-  else begin
-    if(v[i] = valor) then
-      recorrerVec:=true;
+  else if(v[i] = valor) then
+      recorrerVec:=true
+   else
     recorrerVec(v,i+1,valor)
 end;
-end;   
+
 function existe(v:vector):boolean;
 var
   valor,i:integer;
