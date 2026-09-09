@@ -110,7 +110,7 @@ var
   aux:lista;
 begin
   aux:=l;
-  while(aux<>nil) and (aux^.dato.materia <> e.materia) do
+  while(aux<>nil) and (aux^.dato.materia < e.materia) do
     aux:=aux^.sig;
   if(aux=nil) then 
     crearReg(l,e)
