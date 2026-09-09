@@ -165,7 +165,7 @@ end;
 
 function buscarMax(v:vector; max,codmax,i:integer):integer;
 begin
-  if(i>10) then
+  if(i>dimf) then
     buscarMax:=codmax
   else begin
     if(v[i] > max) then begin
