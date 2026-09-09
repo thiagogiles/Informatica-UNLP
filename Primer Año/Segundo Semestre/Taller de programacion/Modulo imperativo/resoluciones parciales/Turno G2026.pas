@@ -148,7 +148,7 @@ end;
 ///////////////// INCISO C //////////////////////////////
 //Implementar un módulo recursivo que reciba el vector generado en a)ii, un valor entero y retorne si existe (o no) una categoría con cantidad de entregas igual al valor recibido
 
-function recorrerVec(v:vector; i,valor:integer):boolean;
+function recorrerVec(v:vector; i:rangocategoria; valor:integer):boolean;
 begin
   if(i > 10) then
     recorrerVec:=false
@@ -160,7 +160,8 @@ end;
 
 function existe(v:vector):boolean;
 var
-  valor,i:integer;
+  valor:integer;
+  i:rangocategoria;
 begin
   writeln('Ingrese el valor a buscar'); readln(valor);
   i:=1;

@@ -168,14 +168,15 @@ begin
  end;
 end;
 
-function materiaMayor(l:lista):string;
+procedure materiaMayor(l:lista);
 var
   max:integer;
   mayor:string;
 begin
   max:=0; 
+  mayor:= 'Ninguna';
   buscarMayor(l,max,mayor);
-  materiaMayor:= mayor;
+  writeln('La materia prima con mas cantidad de empanadas es: ', mayor);
 end;  
 //////////////////// PROGRAMA PRINCIPAL /////////////////////
 var
@@ -184,5 +185,5 @@ var
 begin
   generar(a,l); writeln('Arbol y lista generados');
   writeln(totalChefs(a) , ' chefs con el dni menor a ese');
-  writeln(materiaMayor(l) , ' es la materia prima con mayor cantidad de empanadas');  
+  materiaMayor(l);
 end.
