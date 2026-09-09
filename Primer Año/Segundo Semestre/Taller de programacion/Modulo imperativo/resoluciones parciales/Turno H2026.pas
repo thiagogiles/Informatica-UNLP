@@ -112,7 +112,7 @@ begin
   aux:=l;
   while(aux<>nil) and (aux^.dato.materia < e.materia) do
     aux:=aux^.sig;
-  if(aux=nil) then 
+  if(aux=nil) or (aux^.dato.materia <> e.materia)then 
     crearReg(l,e)
   else
     aux^.dato.total:= aux^.dato.total + 1;
