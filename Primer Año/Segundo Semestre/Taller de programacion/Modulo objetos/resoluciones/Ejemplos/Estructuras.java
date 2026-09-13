@@ -5,10 +5,7 @@
  */
 package Ejemplos;
 
-/**
- *
- * @author Thiago
- */
+
 import PaqueteLectura.GeneradorAleatorio;
 public class Estructuras {
     public static void main(String[] args) {

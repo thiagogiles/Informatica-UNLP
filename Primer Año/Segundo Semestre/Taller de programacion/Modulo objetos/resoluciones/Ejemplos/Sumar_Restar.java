@@ -14,7 +14,7 @@ public class Sumar_Restar {
   public static void main (String[] args ){
       // SUMAR Y RESTAR
       
-      int i = 3;
+      int i = 3; 
       System.out.println("I es: " + i);
       i++;
       System.out.println("I es: " + i);
@@ -23,7 +23,7 @@ public class Sumar_Restar {
       
       // ARITMETICAS 
       
-      int resultado = 1 + 5;
+      int resultado = 1 + 5; 
       System.out.println("El resultado inicial es: " + resultado);
       resultado -= 1;
       System.out.println("Resultado ahora es: " + resultado);

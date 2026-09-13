@@ -44,4 +44,5 @@ public class Paquete_Lectura {
         random = random.toUpperCase(); // Transformo todo en mayuscula
         System.out.println(random); // String de longitud 4
     }
+   
 }

@@ -10,9 +10,15 @@ public class Ejercicio_1 {
         int random = GeneradorAleatorio.generarInt(12);
         int i = 0;
         
+        // INICIALIZO VECTOR
         
+           for (int j=0; j<10; j++ ){
+                 vector[j]=0;    
+           }
+           System.out.println("Vector inicializado");
+           
         // RESOLUCION
-        
+ 
         while(random != 11){ 
             vector[i] = random;
             System.out.println("I es: " + (i+1));
