@@ -68,8 +68,8 @@ Libro libro3 = new Libro(
         if(encontrado != null) {
              System.out.println(encontrado.getPrimerAutor());
         }
-       int cant= 15;
        Estante N = new Estante (15);
-        System.out.println(N.estaLleno(cant));
+        System.out.println(N.estaLleno());
+        
     }
 }

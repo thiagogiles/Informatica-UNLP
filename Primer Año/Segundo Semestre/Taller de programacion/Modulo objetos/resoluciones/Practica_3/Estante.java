@@ -17,6 +17,7 @@ public class Estante {
       public Estante(){
           libros = new Libro[20];
           cantidad = 0;
+          maximo = 20;
       }
       
       public Estante(int N){
@@ -29,13 +30,11 @@ public class Estante {
           return cantidad;
       }
       
-      public boolean estaLleno(int N){
+      public boolean estaLleno(){
           return this.cantidad == this.maximo;
       }
-      public boolean estaLleno(){
-          return this.cantidad == 20;
-      }
       
+
       public void agregarLibro(Libro unLibro){
           if (!estaLleno()){
           libros[this.cantidad] = unLibro;
@@ -46,7 +45,7 @@ public class Estante {
       public Libro buscarTitulo(String Titulo){
           for(int i=0; i<cantidad; i++){
               if(libros[i].getTitulo().equals(Titulo)) {
-                  return libros[i];    }
+                  return libros[i];    }    
       }
    return null;
 }
