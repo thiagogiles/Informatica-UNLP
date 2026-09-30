@@ -15,14 +15,16 @@ public class Sistema_Mensual extends Sistema {
     public Sistema_Mensual(String nombre, double  latitud, double  longitud, int A, int N){
         super(nombre,latitud,longitud,A,N);
         promedio = new double [12];
+        this.iniciar();
+    }
+    
+    private void iniciar(){
         for(int i=0; i<this.getDimF(); i++){
             for(int j=0; j<12; j++){
                 promedio[j] += this.reportarTemperatura(j+1, i+this.getAñoInicio());
             }
         }
     }
-    
-    
     public String getPromedio(){
         String aux= "";
         for(int i=0; i<12; i++){

@@ -21,13 +21,17 @@ public abstract class Sistema {
         this.añoInicio = A;
         this.dimF = N;
         temperaturas = new double [N][12];
-        for (int i = 0; i < N; i++) {
+        this.iniciar();
+    }
+    
+    private void iniciar(){
+        for (int i = 0; i < this.dimF; i++) {
             for (int j = 0; j < 12; j++) {
                 temperaturas[i][j]= GeneradorAleatorio.generarDouble(5000)+15000;
             }
         }
     }
-
+    
     public int getAñoInicio() {
         return añoInicio;
     }
