@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package p4ej5;
+package Practica_4;
 
 /**
  *
@@ -14,11 +14,11 @@ public class MainDibujo {
   Dibujo d = new Dibujo("Pinturas"); 
          
   Cuadrado c1 = new Cuadrado(10,"Violeta","Rosa"); 
-  Rectangulo r= new Rectangulo(20,10,"Azul","Celeste"); 
+  Triangulo t= new Triangulo(15,20,10,"Azul","Celeste"); 
   Cuadrado c2= new Cuadrado(30,"Rojo","Naranja"); 
          
   d.agregar (c1); 
-  d.agregar (r); 
+  d.agregar (t); 
   d.agregar (c2); 
          
   d.mostrar(); 
