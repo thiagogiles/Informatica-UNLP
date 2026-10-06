@@ -43,7 +43,7 @@ public abstract class Empleado {
     public abstract double calcularEfectividad();
     
     public double calcularSueldoACobrar(){
-        return this.getSueldo() + (this.getAntiguedad() * 1.1);
+        return this.getSueldo() + (this.getSueldo() * 0.10 * this.getAntiguedad());
     }
     
     public String toString(){
