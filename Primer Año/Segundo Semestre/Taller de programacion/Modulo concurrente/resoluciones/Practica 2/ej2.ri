@@ -1,0 +1,71 @@
+programa p2ej2
+procesos
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso jfp(ES flo:numero ES pap:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flo:=flo + 1
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      pap:=pap + 1
+  fin
+  proceso escalon(ES cant:numero E ancho:numero E alto:numero)
+  variables
+    flo,pap:numero
+  comenzar
+    flo:=0
+    pap:=0
+    jfp(flo,pap)
+    mover
+    derecha
+    repetir alto
+      jfp(flo,pap)
+      mover
+    jfp(flo,pap)
+    si(flo>pap)
+      cant:=cant + 1
+  fin
+
+areas
+  a1: AreaP (2,1,30,10)
+  aj: AreaP (1,1,1,1)
+robots
+  robot jugador
+  variables
+    cant,alto:numero
+  comenzar
+    cant:=0
+    repetir 4
+      Random(alto,1,5)
+      escalon(cant,1,alto)
+      izquierda
+    EnviarMensaje(cant,jefe)
+  fin
+  robot rj
+  variables
+    total,aux:numero
+  comenzar
+    total:=0
+    repetir 3
+      RecibirMensaje(aux,*)
+      total:= total + aux
+    Informar("el total es",total)
+  fin
+variables
+  r1,r2,r3: jugador
+  jefe: rj
+comenzar
+  AsignarArea(jefe, aj)
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a1)
+  AsignarArea(r3,a1)
+  Iniciar(jefe, 1,1)
+  Iniciar(r1,2,1)
+  Iniciar(r2,7,1)
+  Iniciar(r3,12,1)
+fin

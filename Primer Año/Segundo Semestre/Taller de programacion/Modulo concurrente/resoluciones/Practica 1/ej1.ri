@@ -1,0 +1,30 @@
+procesos 
+ proceso
+fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    flor,sin:numero
+  comenzar
+     flor=0;
+     sin=0;
+     repetir 99
+       jf(flor)
+       si~(HayFlorEnLaEsquina)
+         sin= sin + 1;
+       mover
+     jf(flor)
+     si~(HayFlorEnLaEsquina)
+       sin= sin + 1;
+     df(flor)
+     Informar(flor,' flores depositadas')
+     Informar(sin, 'esquinas sin flores')
+  fin
+variables
+  R_info: robot1
+comenzar
+  AsignarArea(R_info, ciudad)
+  Iniciar(R_info, 1,1)
+fin

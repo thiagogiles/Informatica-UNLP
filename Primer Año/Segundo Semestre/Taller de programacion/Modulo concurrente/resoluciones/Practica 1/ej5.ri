@@ -1,0 +1,41 @@
+procesos
+  proceso 
+
+areas
+  a1: AreaP (1,80,1,75)
+  a2: AreaP (75,80,80,80)
+  a3: AreaP (10,1,15,1)
+  a4: AreaP (71,15,71,10)
+robots
+  robot robot1
+  comenzar
+    
+  fin
+variables
+  r1: robot1
+  r2 robot2
+  r3: robot3
+  r4: robot4
+comenzar
+  AsignarArea(r1, ciudad)
+  Iniciar(r1, 1,1)
+fin
+
+
+
+
+
+
+
+
+
+
+{Realice un programa en el que cuatro robots realizan las siguientes actividades: 
+● El robot 1 debe limpiar de flores las primeras 15 esquinas de las calles 75 y 80. Al finalizar 
+cada calle, debe depositar todas las flores en la última esquina. 
+● El robot 2 debe limpiar de papeles las últimas 20 esquinas de las avenidas 75 y 80. Al finalizar 
+cada avenida debe depositar todos los papeles en la primera esquina.  
+● El robot 3 debe limpiar de flores las últimas 30 esquinas de las calles 10 y 15. Al finalizar cada 
+calle, debe depositar todas las flores en la última esquina. 
+● El robot 4 debe limpiar de papeles las primeras 10 esquinas de las avenidas 10 y 15. Al finalizar 
+cada avenida debe depositar todos los papeles en la primera esquina.}

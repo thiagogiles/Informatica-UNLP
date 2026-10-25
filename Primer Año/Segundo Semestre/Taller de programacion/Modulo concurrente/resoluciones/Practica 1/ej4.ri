@@ -1,0 +1,65 @@
+programa ej4
+procesos
+  proceso jp
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso jf
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso recorridoF
+  comenzar
+    repetir 24
+      repetir 99
+        jf
+        mover
+      jf
+      Pos(PosAv+1,1)
+    repetir 99
+      jf
+      mover
+  fin
+  proceso recorridoP
+  comenzar
+    repetir 24
+      repetir 99
+        jp
+        mover
+      jp
+      Pos(PosAv+1,1)
+    repetir 99
+      jp
+      mover
+  fin
+areas
+  a1: AreaP (1,1,25,100)
+  a2: AreaP (26,1,50,100)
+  a3: AreaP (51,1,75,100)
+  a4: AreaP (76,1,100,100)
+robots
+  robot robot1
+  comenzar
+    recorridoF
+    Pos(PosAv+26,1)
+    recorridoF
+  fin
+  robot robot2
+  comenzar
+    recorridoP
+    Pos(PosAv+26,1)
+    recorridoP
+  fin
+variables
+  r1: robot1
+  r2: robot2
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,a3)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,a4)
+  Iniciar(r1,1,1)
+  Iniciar(r2,26,1)
+fin

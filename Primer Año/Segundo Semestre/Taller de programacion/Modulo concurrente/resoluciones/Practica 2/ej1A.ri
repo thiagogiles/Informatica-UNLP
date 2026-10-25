@@ -1,0 +1,80 @@
+programa p2ej1A
+procesos
+  proceso jf(ES flo:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flo:=flo + 1
+  fin
+  proceso moverseA(ES flo:numero)
+  comenzar
+    repetir 99
+      jf(flo)
+      mover
+    jf(flo)
+  fin
+  proceso moverseB(ES flo:numero)
+  comenzar
+    repetir 98
+      jf(flo)
+      mover
+    jf(flo)
+  fin
+  proceso recorrerA(ES flo:numero)
+  comenzar
+    repetir 9
+      moverseA(flo)
+      Pos(1,PosCa+1)
+    moverseA(flo)
+  fin
+  proceso recorrerB(ES flo:numero)
+  comenzar
+    repetir 9
+      moverseB(flo)
+      Pos(2,PosCa+1)
+    moverseB(flo)
+  fin
+areas
+  a1: AreaP (1,1,100,10)
+  a2: AreaP (2,11,100,20)
+robots
+  robot robot1
+  variables
+    flo,aux,resta:numero
+    ok:boolean
+  comenzar
+    flo:=0
+    derecha
+    recorrerA(flo)
+    EnviarMensaje(r2,flo)
+    RecibirMensaje(ok,r1)
+    si(ok = V)
+      RecibirMensaje(aux,r2)
+      resta:=flo-aux
+      Informar("La diferencia es de",resta)
+  fin
+  robot robot2
+  variables
+    flo,aux,resta:numero
+  comenzar
+    flo:=0
+    derecha
+    recorrerB(flo)
+    RecibirMensaje(aux,r1)
+    si(flo>aux)
+      resta:= flo - aux
+      Informar("La diferencia es de",resta)
+      EnviarMensaje(r1,F)
+    sino
+      EnviarMensaje(r1,V)
+      EnviarMensaje(r1,flo)
+  fin
+variables
+  r1: robot1
+  r2: robot2
+comenzar
+  AsignarArea(r1, a1)
+  AsignarArea(r2,a2)
+  Iniciar(r1, 1,1)
+  Iniciar(r2,2,11)
+fin

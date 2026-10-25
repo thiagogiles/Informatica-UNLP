@@ -1,0 +1,17 @@
+programa ejm
+procesos
+  proceso 
+
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  comenzar
+    
+  fin
+variables
+  r1: robot1
+comenzar
+  AsignarArea(r1, ciudad)
+  Iniciar(r1, 1,1)
+fin

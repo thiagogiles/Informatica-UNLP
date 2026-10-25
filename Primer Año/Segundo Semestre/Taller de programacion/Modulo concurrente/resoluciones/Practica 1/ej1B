@@ -1,0 +1,53 @@
+programa ej1B
+procesos 
+  proceso recorrido(ES flor:numero ES sin:numero)
+  comenzar
+    flor:=0
+    sin:=0
+    repetir 99
+      si(HayFlorEnLaEsquina)
+        jf(flor)
+      sino
+        sin:= sin + 1
+      mover
+    si(HayFlorEnLaEsquina)
+      jf(flor)
+    sino
+      sin:= sin + 1
+    df(flor)
+    Informar(' flores depositadas',flor)  
+    Informar('esquinas sin flores',sin)
+  fin
+  proceso jf(ES flor:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flor:=flor + 1
+  fin
+  proceso df(E flor:numero)
+  comenzar
+    repetir flor
+      depositarFlor
+      flor:= flor - 1
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    flor,sin:numero
+  comenzar
+    recorrido(flor,sin)
+  fin
+variables
+  r1: robot1
+  r2: robot1
+  r3: robot1
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 3,1)
+  Iniciar(r3, 5,1)
+fin

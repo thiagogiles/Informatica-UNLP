@@ -1,0 +1,62 @@
+programa eje3
+procesos
+  proceso jf(ES af:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      af:=af + 1
+    repetir af
+      depositarFlor
+  fin
+  proceso jp(ES ap:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      ap:=ap + 1
+    repetir ap
+      depositarPapel
+  fin
+  proceso izquierda
+  comenzar
+    repetir 2
+      derecha
+  fin
+  proceso escalon(ES cont:numero E lado:numero)
+  variables
+    af,ap:numero
+  comenzar
+    af:=0
+    ap:=0
+    repetir 2
+      repetir lado
+        jf(af)
+        jp(ap)
+        mover
+      derecha
+    si(ap-af = 1)
+      cont:=cont + 1
+  fin
+areas
+  ciudad: AreaC (1,1,30,30)
+robots
+  robot ro1
+  variables
+    cont,lado:numero
+  comenzar
+    lado:=1
+    repetir 4
+      escalon(cont,lado)
+      lado:= lado + 1
+      izquierda
+    Informar('kkk',cont)
+  fin
+variables
+  r1,r2,r3: ro1
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)
+  Iniciar(r1,1,1)
+  Iniciar(r2,10,10)
+  Iniciar(r3,20,20)
+fin
