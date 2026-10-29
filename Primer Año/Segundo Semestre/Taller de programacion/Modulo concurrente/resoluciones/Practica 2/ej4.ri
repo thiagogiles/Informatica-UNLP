@@ -1,0 +1,181 @@
+programa p2ej4
+procesos
+  proceso limpiar (ES f:numero ES p:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      p:=p+1
+  fin
+  proceso cuadrante(ES f:numero ES p:numero)
+  variables
+    avx,cax,avaux,caaux:numero
+  comenzar
+    RecibirMensaje(avx,r5)
+    RecibirMensaje(cax,r5)
+    avaux:=PosAv
+    caaux:=PosCa
+    Pos(avx,cax)
+    limpiar(f,p)
+    Pos(avaux,caaux)
+    EnviarMensaje(1,r5)
+  fin
+  proceso enviarCuadrante(E ran:numero E av:numero E ca:numero)
+  comenzar
+    si(ran = 1)
+      EnviarMensaje(V,r1)
+      EnviarMensaje(F,r2)
+      EnviarMensaje(F,r3)
+      EnviarMensaje(F,r4)
+      EnviarMensaje(av,r1)
+      EnviarMensaje(ca,r1)
+    sino
+      si(ran = 2)
+        EnviarMensaje(F,r1)
+        EnviarMensaje(V,r2)
+        EnviarMensaje(F,r3)
+        EnviarMensaje(F,r4)
+        EnviarMensaje(av,r2)
+        EnviarMensaje(ca,r2)
+      sino
+        si(ran = 3)
+          EnviarMensaje(F,r1)
+          EnviarMensaje(F,r2)
+          EnviarMensaje(V,r3)
+          EnviarMensaje(F,r4)
+          EnviarMensaje(av,r3)
+          EnviarMensaje(ca,r3)
+        sino
+          EnviarMensaje(F,r1)
+          EnviarMensaje(F,r2)                  
+          EnviarMensaje(F,r3)                  
+          EnviarMensaje(V,r4)
+          EnviarMensaje(av,r4)                
+          EnviarMensaje(ca,r4)
+  fin
+  proceso EnviarID
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+areas
+  cuadrado: AreaPC(25,25,75,75)
+  a1:AreaP(1,1,1,1)
+  a2:AreaP(25,1,25,1)
+  a3:AreaP(30,1,30,1)
+  a4:AreaP(35,1,35,1)
+  a5:AreaP(40,1,40,1)
+robots
+  robot florero
+  variables
+    id,f,p,suma:numero
+    paso:boolean
+  comenzar
+    f:=0
+    p:=0
+    RecibirMensaje(id,r5)
+    repetir 10
+      RecibirMensaje(paso,r5)
+      si(paso = V)
+        cuadrante(f,p)
+    suma:= f + p
+    EnviarMensaje(id,r5)
+    EnviarMensaje(suma,r5)
+    RecibirMensaje(paso,r5)
+    si(paso=V)
+      Pos(50,50)
+  fin
+  robot juez
+  variables
+    av,ca,ran,cant,max,maxid,id:numero
+  comenzar
+    EnviarID
+    maxid:=0
+    max:=-1
+    repetir 10
+      Random(av,25,75)
+      Random(ca,25,75)
+      Random(ran,1,4)
+      si(ran = 1)
+        enviarCuadrante(ran,av,ca)
+      sino
+        si(ran = 2)
+          enviarCuadrante(ran,av,ca)
+        sino
+          si(ran = 3)
+            enviarCuadrante(ran,av,ca)
+          sino
+            enviarCuadrante(ran,av,ca)
+      RecibirMensaje(ran,*)
+    
+    repetir 4
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(cant,r1)
+        si(cant>max)
+          max:=cant
+          maxid:=id
+        sino
+          si(id=2)
+            RecibirMensaje(cant,r2)
+            si(cant>max)
+              max:=cant
+              maxid:=id
+            sino
+              si(id=3)
+                RecibirMensaje(cant,r3)
+                si(cant>max)
+                  max:=cant
+                  maxid:=id
+                sino
+                  RecibirMensaje(cant,r4)
+                  si(cant>max)
+                    max:=cant
+                    maxid:=id
+    si(maxid=1)
+      EnviarMensaje(V,r1)
+      EnviarMensaje(F,r2)
+      EnviarMensaje(F,r3)
+      EnviarMensaje(F,r4)
+    sino
+      si(maxid=2)
+        EnviarMensaje(F,r1)
+        EnviarMensaje(V,r2)
+        EnviarMensaje(F,r3)
+        EnviarMensaje(F,r4)
+      sino
+        si(maxid=3)
+          EnviarMensaje(F,r1)
+          EnviarMensaje(F,r2)
+          EnviarMensaje(V,r3)
+          EnviarMensaje(F,r4)
+        sino
+          EnviarMensaje(F,r1)
+          EnviarMensaje(F,r2)
+          EnviarMensaje(F,r3)
+          EnviarMensaje(V,r4)
+    Informar("el ganador es", maxid)
+  fin
+variables
+  r1,r2,r3,r4: florero
+  r5: juez
+comenzar
+  AsignarArea(r1, cuadrado)
+  AsignarArea(r2, cuadrado)
+  AsignarArea(r3, cuadrado)
+  AsignarArea(r4, cuadrado)
+  AsignarArea(r1, a2)
+  AsignarArea(r2, a3)
+  AsignarArea(r3, a4)
+  AsignarArea(r4, a5)
+  AsignarArea(r5, a1)
+  Iniciar(r1, 25,1)
+  Iniciar(r2, 30,1)
+  Iniciar(r3, 35,1)
+  Iniciar(r4, 40,1)
+  Iniciar(r5,1,1)
+fin
