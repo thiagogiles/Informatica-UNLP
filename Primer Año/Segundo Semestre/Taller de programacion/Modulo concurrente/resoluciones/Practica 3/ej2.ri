@@ -1,0 +1,129 @@
+programa ej2
+procesos
+  proceso giro
+  comenzar
+    repetir 3
+      derecha
+  fin
+  
+  proceso jf(ES fl:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      fl:=fl+1
+  fin
+
+  proceso jp(ES pp:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      pp:=pp+1
+  fin
+
+  proceso izq
+  comenzar
+    repetir 2
+      derecha
+  fin
+
+  proceso escalonA (ES lado:numero ES fl:numero)
+  comenzar
+    repetir 2
+      repetir lado
+        mover
+      derecha
+      jf(fl)
+    izq
+  fin
+  
+  proceso escalonB (ES lado:numero ES pp:numero)
+  comenzar
+    repetir 2
+      repetir lado
+        mover
+      giro
+      jp(pp)
+    izq
+  fin
+areas
+  a1: AreaP (1,1,15,30)
+  a2: AreaP(17,1,31,30)
+  aj: AreaP(16,1,16,1)
+  pe: AreaC(16,16,16,16)
+robots
+  robot florero
+  variables
+    id,lado,fl:numero
+  comenzar
+    fl:=0
+    lado:=5
+    RecibirMensaje(id,j)
+    repetir 4
+      escalonA(lado,fl)
+      lado:=lado-1
+    mover
+    jf(fl)
+    derecha
+    BloquearEsquina(PosAv+1,PosCa)
+    mover
+    izq
+    mover
+    LiberarEsquina(PosAv+1,PosCa)
+    repetir 4
+      lado:=lado+1
+      escalonA(lado,fl)
+    Informar("flores juntadas",fl)
+    EnviarMensaje(id,j)
+  fin
+  robot papelero
+  variables
+    id,lado,pp:numero
+  comenzar
+    pp:=0
+    lado:=5
+    RecibirMensaje(id,j)
+    repetir 4
+      escalonB(lado,pp)
+      lado:=lado-1
+    mover
+    jp(pp)
+    giro
+    BloquearEsquina(PosAv-1,PosCa)
+    mover
+    izq
+    mover
+    LiberarEsquina(PosAv-1,PosCa)
+    repetir 4
+      lado:=lado+1
+      escalonB(lado,pp)
+
+    Informar("papeles juntados",pp)
+    EnviarMensaje(id,j)
+  fin
+  robot juez
+  variables
+    id:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    RecibirMensaje(id,*)
+    si(id=1)
+      Informar("el primero en llegar a la meta es el florero",1)
+    sino
+      Informar("el primero en llegar a la meta es el papelero",2)
+    RecibirMensaje(id,*)
+  fin
+variables
+  r1:florero
+  r2:papelero
+  j:juez
+comenzar
+  AsignarArea(r1, a1)
+  AsignarArea(r2,a2)
+  AsignarArea(j,aj)
+  AsignarArea(r1,pe)
+  AsignarArea(r2,pe)
+  Iniciar(r1, 1,1)
+  Iniciar(r2,31,1)
+  Iniciar(j,16,1)
+fin

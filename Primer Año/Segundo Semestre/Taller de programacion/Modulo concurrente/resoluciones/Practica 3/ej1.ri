@@ -1,0 +1,121 @@
+programa ejm
+procesos
+  proceso dejarF(ES fl:numero)
+  variables
+    auxav,auxca:numero
+  comenzar
+    auxav:=PosAv
+    auxca:=PosCa
+    repetir fl
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      depositarFlor
+      fl:=fl-1
+      Pos(auxav,auxca)
+      LiberarEsquina(10,10)
+  fin
+  proceso dejarTodo(ES fl:numero ES pp:numero)
+  variables
+    auxav,auxca:numero
+  comenzar
+    auxav:=PosAv
+    auxca:=PosCa
+    repetir fl
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      depositarFlor
+      fl:=fl-1
+      Pos(auxav,auxca)
+      LiberarEsquina(10,10)
+    repetir pp
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      depositarPapel
+      pp:=pp-1
+      Pos(auxav,auxca)
+      LiberarEsquina(10,10)
+  fin
+  proceso jf(ES fl:numero E caran:numero E avran:numero)
+  variables
+    auxav,auxca:numero
+  comenzar
+    auxav:=PosAv
+    auxca:=PosCa
+    BloquearEsquina(avran,caran)
+    Pos(avran,caran)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      fl:=fl+1
+    Pos(auxav,auxca)
+    LiberarEsquina(avran,caran)
+  fin
+  proceso juntar(ES fl:numero ES pp:numero E avran:numero E caran:numero)
+  variables
+    auxav,auxca:numero
+  comenzar
+    auxav:=PosAv
+    auxca:=PosCa
+    BloquearEsquina(avran,caran)
+    Pos(avran,caran)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      fl:=fl+1
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      pp:=pp+1
+    Pos(auxav,auxca)
+    LiberarEsquina(avran,caran)
+  fin
+areas
+  a1: AreaPC (1,1,5,10)
+  a2: AreaPC (6,1,10,9)
+  af1: AreaP(6,10,6,10)
+  af2: AreaP(7,10,7,10)
+  ap1: AreaP(8,10,8,10)
+  ap2: AreaP(9,10,9,10)
+  fuente: AreaC(10,10,10,10)
+robots
+  robot florero
+  variables
+    fl,caran,avran:numero
+  comenzar
+    fl:=0
+    repetir 5
+      Random(avran,1,5)
+      Random(caran,1,10)
+      jf(fl,caran,avran)
+    dejarF(fl)
+  fin
+  robot papelero
+  variables
+    fl,pp,caran,avran:numero
+  comenzar
+    fl:=0
+    pp:=0
+    repetir 3
+      Random(avran,6,10)
+      Random(caran,1,9)
+      juntar(fl,pp,avran,caran)
+    dejarTodo(fl,pp)
+  fin
+variables
+  f1,f2: florero
+  p1,p2: papelero
+comenzar
+  AsignarArea(f1, a1 )
+  AsignarArea(f2, a1 )
+  AsignarArea(p1, a2 )
+  AsignarArea(p2, a2 )
+  AsignarArea(f1, af1 )
+  AsignarArea(f2, af2 )
+  AsignarArea(p1, ap1 )
+  AsignarArea(p2, ap2 )
+  AsignarArea(f1, fuente)
+  AsignarArea(f2, fuente)
+  AsignarArea(p1, fuente)
+  AsignarArea(p2, fuente)
+  Iniciar(f1, 6,10)
+  Iniciar(f2, 7,10)
+  Iniciar(p1, 8,10)
+  Iniciar(p2, 9,10)
+fin
