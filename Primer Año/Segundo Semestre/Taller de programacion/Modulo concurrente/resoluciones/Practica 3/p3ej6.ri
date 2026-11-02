@@ -1,0 +1,193 @@
+programa p3ej6
+procesos
+  proceso calleA(ES f:numero)
+  comenzar
+    mientras((f>0) & (PosAv<100))
+      depositarFlor
+      f:=f-1
+      mover
+  fin
+  proceso calleB(ES f:numero ES p:numero)
+  comenzar
+    mientras((f>0) & (p>0) & (PosAv<100))
+      depositarFlor
+      f:=f-1
+      depositarPapel
+      p:=p-1
+      mover
+  fin
+  proceso interseccionA(ES f:numero)
+  comenzar
+    repetir 2
+      jf(f)
+      mover
+    jf(f)
+    BloquearEsquina(6,6)
+    mover
+    jf(f)
+    mover
+    LiberarEsquina(6,6)
+    jf(f)
+    mover
+    jf(f)
+    derecha
+  fin
+  proceso interseccionB(ES f:numero)
+  comenzar
+    jf(f)
+    mover
+    jf(f)
+    BloquearEsquina(7,5)
+    mover
+    jf(f)
+    mover
+    LiberarEsquina(7,5)
+    repetir 2
+      jf(f)
+      mover
+    jf(f)
+    derecha
+  fin
+  proceso interA(ES f:numero ES p:numero)
+  comenzar
+    jf(f)
+    jp(p)
+    mover
+    jf(f)
+    jp(p)
+    BloquearEsquina(6,6)
+    mover
+    jf(f)
+    jp(p)
+    mover
+    LiberarEsquina(6,6)
+    repetir 6
+      jf(f)
+      jp(p)
+      mover
+    jf(f)
+    jp(p)
+    derecha
+  fin
+  proceso interB(ES f:numero ES p:numero)
+  comenzar
+    repetir 6
+      jf(f)
+      jp(p)
+      mover
+      jf(f)
+      jp(p)
+    BloquearEsquina(7,5)
+    mover
+    jf(f)
+    jp(p)
+    mover
+    LiberarEsquina(7,5)
+    jf(f)
+    jp(p)
+    mover
+    jf(f)
+    jp(p)
+    derecha
+  fin
+  proceso ladob(ES f:numero ES p:numero)
+  comenzar
+    repetir 9
+      jf(f)
+      jp(p)
+      mover
+    jf(f)
+    jp(p)
+    derecha
+  fin
+  proceso jp(ES p:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      p:=p+1
+  fin
+  proceso jf(ES f:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+  fin
+  proceso lado(ES f:numero)
+  comenzar
+    repetir 5
+      jf(f)
+      mover
+    jf(f)
+    derecha
+  fin
+areas
+  cuadrado: AreaPC (2,2,15,15)
+  calles: AreaPC (1,20,100,21)
+  aj: AreaP(1,1,1,1)
+robots
+  robot florero
+  variables
+    id,f,cax:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    f:=0
+    lado(f)
+    interseccionA(f)
+    interseccionB(f)
+    lado(f)
+    EnviarMensaje(id,rj)
+    RecibirMensaje(cax,rj)
+    Pos(1,cax)
+    derecha
+    calleA(f)
+  fin
+  robot flp
+  variables
+    id,f,p,cax:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    f:=0
+    p:=0
+    interA(f,p)
+    ladob(f,p)
+    ladob(f,p)
+    interB(f,p)
+    EnviarMensaje(id,rj)
+    RecibirMensaje(cax,rj)
+    Pos(1,cax)
+    derecha
+    calleB(f,p)
+  fin
+  robot juez
+  variables
+    id:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    RecibirMensaje(id,*)
+    si(id = 1)
+      EnviarMensaje(20,r1)
+      EnviarMensaje(21,r2)
+    sino
+      EnviarMensaje(20,r2)
+      EnviarMensaje(21,r1)
+
+  fin
+variables
+  r1:florero
+  r2:flp
+  rj:juez
+comenzar
+  AsignarArea(r1, cuadrado)
+  AsignarArea(r2, cuadrado)
+  AsignarArea(r1,calles)
+  AsignarArea(r2,calles)
+  AsignarArea(rj, aj)
+  Iniciar(r1,2,2)
+  Iniciar(r2,5,5)
+  Iniciar(rj,1,1)
+fin
+
+
+
+//// 6,6 y 7,5
