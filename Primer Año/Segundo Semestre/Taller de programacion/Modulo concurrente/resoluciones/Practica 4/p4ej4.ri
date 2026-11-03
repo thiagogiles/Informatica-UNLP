@@ -1,0 +1,105 @@
+programa p4ej4
+procesos
+  proceso flo(ES f:numero E avr:numero E car:numero)
+  variables
+    avx,cax:numero
+  comenzar
+    avx:=PosAv
+    cax:=PosCa
+    BloquearEsquina(avr,car)
+    Pos(avr,car)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+    Pos(avx,cax)
+    LiberarEsquina(avr,car)
+  fin
+  proceso pap(ES p:numero E avr:numero E car:numero)
+  variables
+    avx,cax:numero
+  comenzar
+    avx:=PosAv
+    cax:=PosCa
+    BloquearEsquina(avr,car)
+    Pos(avr,car)
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      p:=p+1
+    Pos(avx,cax)
+    LiberarEsquina(avr,car)
+  fin
+  proceso vac(ES f:numero ES p:numero E avr:numero E car:numero)
+  variables
+    avx,cax:numero
+  comenzar
+    avx:=PosAv
+    cax:=PosCa
+    BloquearEsquina(avr,car)
+    Pos(avr,car)
+    repetir p
+      depositarPapel
+      p:=p-1
+    repetir f
+      depositarFlor
+      f:=f-1
+    Pos(avx,cax)
+    LiberarEsquina(avr,car)
+  fin
+areas
+  aj: AreaP(1,1,1,1)
+  a1: AreaP(2,1,2,1)
+  a2: AreaP(3,1,3,1)
+  at: AreaPC(2,2,100,100)
+robots
+  robot trabajador
+  variables
+    num,avr,car,f,p:numero
+  comenzar
+    RecibirMensaje(num,j)
+    f:=0
+    p:=0
+    mientras(num<>4)
+      RecibirMensaje(avr,j)
+      RecibirMensaje(car,j)
+      si(num=1)
+        flo(j,avr,car)
+      sino
+        si(num=2)
+          pap(p,avr,car)
+        sino
+          vac(f,p,avr,car)
+      RecibirMensaje(num,j)
+  fin
+  robot jefe
+  variables
+    num,ro,avr,car:numero
+  comenzar
+    repetir 10
+      Random(ro,1,2)
+      Random(num,1,3)
+      Random(avr,2,100)
+      Random(car,2,100)
+      si(ro=1)
+        EnviarMensaje(r1,num)
+        EnviarMensaje(r1,avr)
+        EnviarMensaje(r1,car)
+      sino
+        EnviarMensaje(r2,num)
+        EnviarMensaje(r2,avr)
+        EnviarMensaje(r2,car)
+    EnviarMensaje(r1,4)
+    EnviarMensaje(r2,4)
+  fin
+variables
+  r1,r2:trabajador
+  j:jefe
+comenzar
+  AsignarArea(j,aj)
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r1,at)
+  AsignarArea(r2,at)
+  Iniciar(j,1,1)
+  Iniciar(r1,2,1)
+  Iniciar(r2,3,1)
+fin

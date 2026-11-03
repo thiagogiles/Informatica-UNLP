@@ -1,0 +1,89 @@
+programa p4ej1
+areas
+  as: AreaP(100,100,100,100)
+  a1: AreaPC(1,1,1,100)
+  a2: AreaPC(2,1,2,100)
+  a3: AreaPC(3,1,3,100)
+robots
+  robot cliente
+  variables
+    id,ran,cax:numero
+  comenzar
+    RecibirMensaje(id,s)
+    mientras(PosCa<100)
+      Random(ran,1,4)
+      EnviarMensaje(id,s)
+      EnviarMensaje(ran,s)
+      cax:=PosCa + 1
+      EnviarMensaje(cax,s)
+      RecibirMensaje(cax,s)
+      mover
+      repetir ran
+        tomarFlor
+      Pos(PosAv,PosCa - 1)
+      mientras((PosCa<100) & (ran>0))
+        mover
+        depositarFlor
+        ran:=ran-1
+      si(PosCa=100)
+        EnviarMensaje(id,s)
+        EnviarMensaje(0,s)
+  fin
+  robot servidor
+  variables
+    id,auxav,auxca,cant,ter:numero
+  comenzar
+    ter:=0
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    mientras(ter < 3)
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(cant,r1)
+      sino
+        si(id=2)
+          RecibirMensaje(cant,r2)
+        sino
+          RecibirMensaje(cant,r3)
+      si(cant<>0)
+        auxav:=id
+        si(id=1)
+          RecibirMensaje(auxca,r1)
+        sino
+          si(id=2)
+            RecibirMensaje(auxca,r2)
+          sino
+            RecibirMensaje(auxca,r3)
+        si(auxca <= 100)
+          Pos(auxav,auxca)
+          repetir cant
+            depositarFlor
+          Pos(100,100)
+        si(id=1)
+          EnviarMensaje(cant,r1)
+        sino
+          si(id=2)
+            EnviarMensaje(cant,r2)
+          sino
+            EnviarMensaje(cant,r3)
+      sino
+        ter:=ter + 1
+        Informar('sumo uno",ter)      
+  fin
+variables
+  r1,r2,r3: cliente
+  s: servidor
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(s,a1)
+  AsignarArea(s,a2)
+  AsignarArea(s,a3)
+  AsignarArea(s,as)
+  Iniciar(r1,1,1)
+  Iniciar(r2,2,1)
+  Iniciar(r3,3,1)
+  Iniciar(s, 100,100)
+fin

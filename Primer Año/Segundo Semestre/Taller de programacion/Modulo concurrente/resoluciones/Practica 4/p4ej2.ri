@@ -1,0 +1,77 @@
+programa p4ej2
+procesos
+  proceso jp (ES p:numero)
+  comenzar
+    mientras((HayPapelEnLaEsquina) & (p<5))
+      tomarPapel
+      p:=p+1
+  fin
+areas
+  fuente: AreaC(50,50,50,50)
+  ap1: AreaP(5,1,5,100)
+  ap2: AreaP(10,1,10,100)
+  ac1: AreaP(11,1,11,1)
+  ac2: AreaP(12,1,12,1)
+robots
+  robot productor
+  variables
+    p,avx,cax:numero
+  comenzar
+    mientras(PosCa<100)
+      p:=0
+      mientras(p<5)
+        jp(p)
+        si~(HayPapelEnLaEsquina)
+          mover
+      si(p=5)
+        avx:=PosAv
+        cax:=PosCa
+        BloquearEsquina(50,50)
+        Pos(50,50)
+        repetir 5
+          depositarPapel
+        Pos(avx,cax)
+        LiberarEsquina(50,50)
+  fin
+  robot consumidor
+  variables
+    ran,cant,p,avx,cax:numero
+  comenzar
+    cant:=0
+    mientras(cant<8)
+      p:=0
+      Random(ran,2,5)
+      avx:=PosAv
+      cax:=PosCa
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      repetir ran
+        si(HayPapelEnLaEsquina)
+          tomarPapel
+          p:=p+1
+      Pos(avx,cax)
+      LiberarEsquina(50,50)
+      si(p=ran)
+        repetir ran
+          depositarPapel
+        cant:=0
+      sino
+        cant:=cant+1
+  fin
+variables
+  p1,p2:productor
+  c1,c2:consumidor
+comenzar
+  AsignarArea(p1,fuente)
+  AsignarArea(p2,fuente)
+  AsignarArea(c1,fuente)
+  AsignarArea(c2,fuente)
+  AsignarArea(p1,ap1)
+  AsignarArea(p2,ap2)
+  AsignarArea(c1,ac1)
+  AsignarArea(c2,ac2)
+  Iniciar(p1,5,1)
+  Iniciar(p2,10,1)
+  Iniciar(c1,11,1)
+  Iniciar(c2,12,1)
+fin
